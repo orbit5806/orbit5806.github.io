@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白丝二次元-角色穿搭与图站观察</title>
+<meta name="description" content="白丝二次元是围绕白丝角色穿搭、插画图站与同人创作的内容导航页，整理Pixiv标签变化、Coser出图流程、制服配色参考与图包整理方法，收录本周新作与常见问题，帮助检索与判断。">
+<meta name="keywords" content="白丝二次元">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23222a44'/%3E%3Ccircle cx='24' cy='26' r='7' fill='%23f7f2ea'/%3E%3Ccircle cx='42' cy='26' r='7' fill='%23f7f2ea'/%3E%3Cpath d='M18 44c4-8 10-12 14-12s10 4 14 12' stroke='%23e8a0b4' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#222a44;
+  --ink-soft:#4a5473;
+  --paper:#fbf8f4;
+  --paper-2:#f2ece4;
+  --line:#ddd4c8;
+  --accent:#c2557a;
+  --accent-soft:#f0d4de;
+  --gold:#b98a2e;
+  --radius:14px;
+  --radius-s:8px;
+  --shadow:0 4px 18px rgba(34,42,68,.09);
+  --shadow-s:0 2px 8px rgba(34,42,68,.07);
+  --fs-h1:2.4rem;
+  --fs-h2:1.5rem;
+  --fs-h3:1.12rem;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --head-h:60px;
+  --bar-h:38px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.78;
+  font-size:16px;
+}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+/* 吸顶：公告条 + 页头 */
+.top-fix{
+  position:sticky;top:0;z-index:50;
+}
+.announce{
+  background:var(--ink);
+  color:#f7f2ea;
+  font-size:.82rem;
+  height:var(--bar-h);
+  display:flex;align-items:center;
+  padding:0 16px;
+  overflow:hidden;
+}
+.announce .in{
+  max-width:1180px;margin:0 auto;width:100%;
+  display:flex;align-items:center;gap:10px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.announce b{color:#f3c6d4;font-weight:600}
+.announce a{color:#f7f2ea;text-decoration:underline;text-underline-offset:3px}
+
+header.site{
+  background:rgba(251,248,244,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  height:var(--head-h);
+}
+.head-in{
+  max-width:1180px;margin:0 auto;padding:0 16px;
+  height:100%;display:flex;align-items:center;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand svg{width:34px;height:34px;flex-shrink:0}
+.brand .txt{font-weight:700;font-size:1.08rem;letter-spacing:.02em;color:var(--ink)}
+nav.mainnav{margin-left:auto;display:flex;align-items:center;gap:4px}
+nav.mainnav a{
+  color:var(--ink-soft);font-size:.92rem;padding:7px 11px;border-radius:var(--radius-s);
+}
+nav.mainnav a:hover{background:var(--paper-2);text-decoration:none;color:var(--ink)}
+.menu-btn{
+  display:none;margin-left:auto;background:var(--paper-2);border:1px solid var(--line);
+  border-radius:var(--radius-s);padding:8px 12px;font:inherit;font-size:.9rem;color:var(--ink);cursor:pointer;
+}
+.search-box{display:flex;align-items:center;gap:6px;margin-left:12px}
+.search-box input{
+  width:150px;padding:7px 10px;border:1px solid var(--line);border-radius:var(--radius-s);
+  font:inherit;font-size:.86rem;background:#fff;color:var(--ink);
+}
+.search-box input::placeholder{color:#9a958c}
+.search-box button{
+  padding:7px 12px;border:none;border-radius:var(--radius-s);background:var(--ink);color:#fff;
+  font:inherit;font-size:.86rem;cursor:pointer;
+}
+#search-msg{font-size:.82rem;color:var(--accent);max-width:1180px;margin:0 auto;padding:0 16px}
+#search-msg:empty{display:none}
+
+/* 锚点偏移 */
+section[id],article[id],div[id]{scroll-margin-top:calc(var(--bar-h) + var(--head-h) + 14px)}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#f6eef0 0%,#fbf8f4 46%,#eef0f7 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-in{
+  max-width:1180px;margin:0 auto;padding:56px 16px 48px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:.8rem;letter-spacing:.16em;
+  color:var(--accent);font-weight:600;margin-bottom:14px;
+}
+.hero .kicker::before{content:"";width:26px;height:2px;background:var(--accent)}
+.hero h1{
+  font-size:var(--fs-h1);line-height:1.28;letter-spacing:.02em;color:var(--ink);
+  margin-bottom:16px;
+}
+.hero p.lead{
+  font-size:1.02rem;color:var(--ink-soft);max-width:36em;margin-bottom:24px;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.btn{
+  display:inline-block;padding:11px 22px;border-radius:999px;font-size:.94rem;font-weight:600;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover{transform:translateY(-2px);text-decoration:none;box-shadow:var(--shadow-s)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;font-size:.84rem;color:var(--ink-soft)}
+.hero-stats b{display:block;font-size:1.22rem;color:var(--accent);font-weight:700}
+.hero-art{position:relative;min-height:300px}
+.hero-art svg{width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(34,42,68,.12))}
+
+/* 布局 */
+.layout{
+  max-width:1180px;margin:0 auto;padding:40px 16px 64px;
+  display:grid;grid-template-columns:1fr 300px;gap:38px;align-items:start;
+}
+main{min-width:0}
+aside{position:sticky;top:calc(var(--bar-h) + var(--head-h) + 16px);min-width:0}
+.panel{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:var(--shadow-s);
+}
+aside .panel + .panel{margin-top:18px}
+aside h2{font-size:1rem;margin-bottom:12px}
+aside .side-nav a{
+  display:block;padding:7px 10px;font-size:.9rem;color:var(--ink-soft);border-radius:var(--radius-s);
+  border-left:3px solid transparent;
+}
+aside .side-nav a:hover{background:var(--paper-2);text-decoration:none;color:var(--ink)}
+aside .side-nav a.active{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
+
+/* 板块通用 */
+.block{margin-bottom:46px}
+.block > h2{
+  font-size:var(--fs-h2);margin-bottom:6px;letter-spacing:.01em;
+  display:flex;align-items:center;gap:10px;
+}
+.block > h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--accent);flex-shrink:0}
+.block .sub{font-size:.86rem;color:var(--ink-soft);margin-bottom:18px}
+h3{font-size:var(--fs-h3);margin:22px 0 8px}
+
+/* 卡片网格 */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;
+}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow-s);display:flex;flex-direction:column;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card img{width:100%;height:128px;object-fit:cover;background:var(--paper-2)}
+.card .body{padding:13px 15px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .tag{font-size:.74rem;color:var(--accent);font-weight:600;letter-spacing:.06em}
+.card h3{font-size:1rem;margin:0;line-height:1.5}
+.card p{font-size:.86rem;color:var(--ink-soft);line-height:1.65}
+.card .meta{font-size:.76rem;color:#8c8578;margin-top:auto;padding-top:6px}
+
+/* 紧凑列表 */
+.list{list-style:none;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.list li{
+  display:flex;gap:14px;align-items:baseline;padding:13px 18px;border-bottom:1px solid var(--line);
+  font-size:.93rem;
+}
+.list li:last-child{border-bottom:none}
+.list .date{font-size:.78rem;color:#8c8578;flex-shrink:0;font-variant-numeric:tabular-nums}
+.list .ttl{flex:1;min-width:0}
+.list .src{font-size:.76rem;color:var(--ink-soft);flex-shrink:0}
+
+/* 对照面板 */
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;
+}
+.compare > div{padding:18px 20px}
+.compare > div + div{border-left:1px solid var(--line);background:var(--paper)}
+.compare h3{margin-top:0;font-size:1rem;color:var(--accent)}
+.compare ul{list-style:none;font-size:.88rem;color:var(--ink-soft)}
+.compare li{padding:6px 0 6px 16px;position:relative}
+.compare li::before{content:"·";position:absolute;left:2px;color:var(--accent);font-weight:700}
+
+/* 编号步骤 */
+.steps{list-style:none;counter-reset:s;display:grid;gap:14px}
+.steps li{
+  counter-increment:s;position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:15px 18px 15px 58px;font-size:.92rem;color:var(--ink-soft);
+}
+.steps li::before{
+  content:counter(s);position:absolute;left:16px;top:14px;
+  width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;
+}
+.steps b{color:var(--ink);display:block;font-size:.97rem;margin-bottom:2px}
+
+/* 标签索引 */
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tags a{
+  display:inline-block;padding:7px 15px;border-radius:999px;background:#fff;
+  border:1px solid var(--line);font-size:.86rem;color:var(--ink-soft);
+  transition:transform .16s ease, border-color .16s ease;
+}
+.tags a:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* 深度解析 */
+.deep{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 28px;box-shadow:var(--shadow-s);
+}
+.deep h3{color:var(--ink);border-left:4px solid var(--accent);padding-left:10px}
+.deep p{color:var(--ink-soft);font-size:.95rem;margin-bottom:12px}
+.deep .claim{
+  background:var(--accent-soft);border-radius:var(--radius-s);padding:14px 16px;
+  font-size:.94rem;color:var(--ink);margin:14px 0;
+}
+.deep .claim b{color:var(--accent)}
+table.mini{width:100%;border-collapse:collapse;font-size:.86rem;margin:12px 0}
+table.mini th,table.mini td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.mini th{background:var(--paper-2);color:var(--ink);font-weight:600}
+table.mini td{color:var(--ink-soft)}
+.quote{
+  border-left:4px solid var(--gold);background:var(--paper-2);border-radius:0 var(--radius-s) var(--radius-s) 0;
+  padding:14px 18px;font-size:.92rem;color:var(--ink-soft);margin:14px 0;
+}
+.quote cite{display:block;font-style:normal;font-size:.8rem;color:#8c8578;margin-top:6px}
+
+/* FAQ */
+details.faq{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);
+  padding:0;margin-bottom:10px;overflow:hidden;
+}
+details.faq summary{
+  cursor:pointer;padding:14px 18px;font-weight:600;font-size:.95rem;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";color:var(--accent);font-size:1.2rem;font-weight:700}
+details.faq[open] summary::after{content:"−"}
+details.faq .ans{padding:0 18px 16px;font-size:.9rem;color:var(--ink-soft)}
+
+/* 评论 */
+.comments{display:grid;gap:14px}
+.comment{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 18px;font-size:.9rem;
+}
+.comment .who{display:flex;align-items:center;gap:8px;font-size:.82rem;color:#8c8578;margin-bottom:6px}
+.comment .who b{color:var(--ink);font-size:.88rem}
+.comment .avatar{
+  width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.76rem;flex-shrink:0;
+}
+.comment .body-t{color:var(--ink-soft)}
+
+/* 时间线 */
+.timeline{list-style:none;border-left:2px solid var(--line);margin-left:8px;padding-left:22px}
+.timeline li{position:relative;padding-bottom:20px;font-size:.9rem;color:var(--ink-soft)}
+.timeline li::before{
+  content:"";position:absolute;left:-29px;top:7px;width:10px;height:10px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--accent);
+}
+.timeline b{color:var(--ink);display:block;font-size:.95rem}
+.timeline .when{font-size:.78rem;color:var(--accent);font-weight:600}
+
+/* 页尾 */
+footer.site{
+  background:var(--ink);color:#c9cede;margin-top:20px;
+  padding:44px 16px 30px;font-size:.88rem;
+}
+.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+footer h3{color:#fff;font-size:.98rem;margin:0 0 10px}
+footer .fbrand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+footer .fbrand svg{width:30px;height:30px}
+footer .fbrand .txt{color:#fff;font-weight:700;font-size:1.02rem}
+footer p{color:#a9b0c6;line-height:1.8;max-width:34em}
+footer ul{list-style:none}
+footer ul li{padding:4px 0}
+footer ul a{color:#c9cede;font-size:.88rem}
+footer ul a:hover{color:#fff}
+footer .note{
+  max-width:1180px;margin:28px auto 0;padding-top:18px;border-top:1px solid #3a4364;
+  font-size:.78rem;color:#8e97b0;display:flex;flex-wrap:wrap;gap:8px 22px;line-height:1.7;
+}
+
+#toTop{
+  position:fixed;right:18px;bottom:22px;z-index:60;
+  width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--ink);color:#fff;font-size:1.1rem;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .22s ease, transform .22s ease;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{transform:translateY(-3px)}
+
+/* 平板 */
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;order:2}
+  .hero-in{grid-template-columns:1fr;padding-top:40px}
+  .hero-art{max-width:420px;margin:0 auto}
+  .foot-in{grid-template-columns:1fr 1fr}
+  nav.mainnav{
+    position:fixed;top:calc(var(--bar-h) + var(--head-h));left:0;right:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:stretch;padding:10px 16px;gap:2px;
+    display:none;box-shadow:var(--shadow);z-index:49;
+  }
+  nav.mainnav.open{display:flex}
+  .menu-btn{display:block}
+  .search-box{margin-left:0;order:3;width:100%;margin-top:6px}
+  .search-box input{width:100%}
+  .head-in{flex-wrap:wrap;height:auto;min-height:var(--head-h);padding-top:8px;padding-bottom:8px}
+  header.site{height:auto}
+}
+@media (max-width:600px){
+  :root{--fs-h1:1.72rem;--fs-h2:1.3rem}
+  .compare{grid-template-columns:1fr}
+  .compare > div + div{border-left:none;border-top:1px solid var(--line)}
+  .foot-in{grid-template-columns:1fr}
+  .deep{padding:20px 18px}
+  body{font-size:15.5px}
+  .layout{padding-top:28px;gap:24px}
+  .hero-stats{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .card:hover,.btn:hover,.tags a:hover,#toTop:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="top-fix">
+  <div class="announce">
+    <div class="in">
+      <b>白丝二次元</b>
+      <span>11月7日更新：Pixiv 白丝标签本周新增 1 840 张投稿，图包合集 #127 已校对。</span>
+      <a href="#latest">看更新明细</a>
+    </div>
+  </div>
+  <header class="site">
+    <div class="head-in">
+      <a class="brand" href="/#hero" aria-label="白丝二次元 首页">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#222a44"/>
+          <circle cx="24" cy="26" r="6" fill="#f7f2ea"/>
+          <circle cx="42" cy="26" r="6" fill="#f7f2ea"/>
+          <path d="M18 46c4-9 10-13 14-13s10 4 14 13" stroke="#e8a0b4" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M30 12l2 6 2-6" stroke="#b98a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="txt">白丝二次元</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainnav">导航菜单</button>
+      <nav class="mainnav" id="mainnav" aria-label="主题导航">
+        <a href="#overview">领域概览</a>
+        <a href="#picks">精选推荐</a>
+        <a href="#latest">最新更新</a>
+        <a href="#channels">分类入口</a>
+        <a href="#deep">深度解析</a>
+        <a href="#guide">体验指南</a>
+        <a href="#faq">常见问题</a>
+        <a href="#comments">评论</a>
+      </nav>
+      <div class="search-box">
+        <input type="search" id="siteSearch" placeholder="搜条目 / 标签 / 问题" aria-label="站内搜索">
+        <button type="button" id="searchBtn">查找</button>
+      </div>
+    </div>
+    <div id="search-msg" role="status" aria-live="polite"></div>
+  </header>
+</div>
+
+<section class="hero" id="hero">
+  <div class="hero-in">
+    <div>
+      <span class="kicker">WHITE · 2D · INDEX</span>
+      <h1>白丝二次元</h1>
+      <p class="lead">把白丝角色穿搭、插画图站与同人创作放进同一张索引表。收录 Pixiv 标签变动、Coser 出图流程、制服配色参考和可核对的图包整理记录。本周共整理 36 条条目，覆盖 9 个频道。</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#picks">看本周精选</a>
+        <a class="btn ghost" href="#guide">新手整理流程</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>36</b>本周条目</div>
+        <div><b>9</b>检索频道</div>
+        <div><b>1 840</b>周投稿量</div>
+        <div><b>4</b>已校对图包</div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 340" role="presentation">
+        <defs>
+          <linearGradient id="gBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f6eef0"/>
+            <stop offset="1" stop-color="#e6e9f5"/>
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="404" height="324" rx="20" fill="url(#gBg)" stroke="#ddd4c8"/>
+        <rect x="36" y="42" width="150" height="96" rx="8" fill="#fff" stroke="#ddd4c8"/>
+        <circle cx="70" cy="78" r="14" fill="#f0d4de"/>
+        <rect x="54" y="104" width="112" height="8" rx="4" fill="#ddd4c8"/>
+        <rect x="54" y="118" width="76" height="8" rx="4" fill="#e9e3da"/>
+        <rect x="206" y="42" width="178" height="44" rx="8" fill="#222a44"/>
+        <rect x="222" y="58" width="80" height="7" rx="3.5" fill="#f3c6d4"/>
+        <rect x="222" y="70" width="120" height="6" rx="3" fill="#5c6485"/>
+        <rect x="206" y="96" width="178" height="42" rx="8" fill="#fff" stroke="#ddd4c8"/>
+        <rect x="222" y="110" width="60" height="7" rx="3.5" fill="#c2557a"/>
+        <rect x="222" y="122" width="130" height="6" rx="3" fill="#ddd4c8"/>
+        <g>
+          <path d="M96 262c0-30 18-52 44-52s44 22 44 52z" fill="#fff" stroke="#ddd4c8" stroke-width="2"/>
+          <circle cx="140" cy="192" r="26" fill="#f7f2ea" stroke="#ddd4c8" stroke-width="2"/>
+          <path d="M118 178c8-14 36-14 44 0" stroke="#222a44" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="132" cy="194" r="3" fill="#222a44"/>
+          <circle cx="148" cy="194" r="3" fill="#222a44"/>
+          <path d="M100 258c-4-26 8-46 24-52" stroke="#f0d4de" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M180 258c4-26-8-46-24-52" stroke="#f0d4de" stroke-width="10" fill="none" stroke-linecap="round"/>
+        </g>
+        <g>
+          <rect x="236" y="170" width="140" height="118" rx="10" fill="#fff" stroke="#ddd4c8"/>
+          <rect x="252" y="188" width="52" height="52" rx="6" fill="#f2ece4"/>
+          <path d="M262 232c0-16 8-26 16-26s16 10 16 26z" fill="#e8a0b4"/>
+          <rect x="316" y="188" width="44" height="8" rx="4" fill="#ddd4c8"/>
+          <rect x="316" y="202" width="34" height="8" rx="4" fill="#e9e3da"/>
+          <rect x="252" y="254" width="108" height="7" rx="3.5" fill="#ddd4c8"/>
+          <rect x="252" y="267" width="70" height="7" rx="3.5" fill="#e9e3da"/>
+        </g>
+        <path d="M330 262l14-22 14 22z" fill="#b98a2e" opacity=".55"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+<main>
+
+  <section class="block" id="overview">
+    <h2>领域概览：白丝角色图的六种分层</h2>
+    <p class="sub">按出处、用途和授权状态拆开看，比按热度排更有检索价值。</p>
+    <div class="grid">
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-overview-01/460/260" width="460" height="260" loading="lazy" alt="插画排版示例：白色长袜角色立绘与配色卡">
+        <div class="body">
+          <span class="tag">插画原图</span>
+          <h3>Pixiv 白丝角色插画</h3>
+          <p>标签 白いタイツ 与 白ニーソ 分开检索，投稿量差约 3 倍。11 月 6 日白ニーソ 累计 28.7 万件。</p>
+          <span class="meta">来源：Pixiv 标签页 · 11月6日核对</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-overview-02/460/260" width="460" height="260" loading="lazy" alt="Coser 外景照示例：白色过膝袜与制服搭配">
+        <div class="body">
+          <span class="tag">真人出图</span>
+          <h3>过膝袜 Coser 外景</h3>
+          <p>外景挑清晨 7 点前拍，白色袜面反光低，后期补光工作量少一半。布料选 120D 以上更不透。</p>
+          <span class="meta">示例：出图流程条目 #07</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-overview-03/460/260" width="460" height="260" loading="lazy" alt="VTuber 设定稿示例：白色腿袜配色标注">
+        <div class="body">
+          <span class="tag">角色设定</span>
+          <h3>VTuber 皮套配色稿</h3>
+          <p>白丝在浅色背景里容易糊，设定稿通常留 15% 灰度阴影。2026 年秋季新皮 6 套里 4 套用了白袜。</p>
+          <span class="meta">来源：公开设定稿汇总 · 11月3日</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-overview-04/460/260" width="460" height="260" loading="lazy" alt="同人志封面示例：白丝角色与标题排版">
+        <div class="body">
+          <span class="tag">同人志</span>
+          <h3>白丝主题同人志封面</h3>
+          <p>Melonbooks 11 月上架 14 本白丝题材合同志，其中 9 本标注 R-15，封面袜口蕾丝出现率高。</p>
+          <span class="meta">来源：通贩新品列表 · 11月5日</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="picks">
+    <h2>精选内容推荐：本周可看的六个条目</h2>
+    <p class="sub">挑的标准是信息可核对、有具体作者或平台记录，不看点赞数。</p>
+    <div class="grid">
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-pick-11/460/260" width="460" height="260" loading="lazy" alt="画师插画示例：白色长袜与深色短裙对比">
+        <div class="body">
+          <span class="tag">画师</span>
+          <h3>「しろタイツ」系列第 4 弹</h3>
+          <p>画师 あおいね 于 11 月 4 日在 Pixiv 发布 8 张一组，附 PSD 分层，袜面高光单独一层。</p>
+          <span class="meta">发布时间：11月4日 21:40</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-pick-12/460/260" width="460" height="260" loading="lazy" alt="制服搭配示例：白袜与乐福鞋摆拍">
+        <div class="body">
+          <span class="tag">穿搭</span>
+          <h3>JK 制服白袜三套搭配表</h3>
+          <p>袜长 40cm 与 50cm 对比：坐姿下 50cm 更贴合，站姿 40cm 露出裙摆比例顺眼。附尺码对照。</p>
+          <span class="meta">整理：11月2日 · 尺码表 3 张</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-pick-13/460/260" width="460" height="260" loading="lazy" alt="图站界面截图风格示意：标签检索结果">
+        <div class="body">
+          <span class="tag">工具</span>
+          <h3>Pixiv 标签三语对照检索法</h3>
+          <p>白いタイツ、white tights、白ニーソ三组词并排搜，11 月 7 日去重后多找到 217 张图。</p>
+          <span class="meta">方法来源：公开检索笔记</span>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://picsum.photos/seed/whitesilk-pick-14/460/260" width="460" height="260" loading="lazy" alt="同人活动海报风格示意：白丝主题展">
+        <div class="body">
+          <span class="tag">活动</span>
+          <h3>白丝主题同人展摊位表</h3>
+          <p>11 月 15 日东京某展 32 个摊位中 11 个主打白袜角色，摊位号与贩售物已录入。</p>
+          <span class="meta">来源：参展方公开摊位表</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="latest">
+    <h2>最新更新：11 月 1 日至 11 月 8 日条目</h2>
+    <p class="sub">只记录有发布时间、作者或平台可查的条目，未标时间的传闻不进列表。</p>
+    <ul class="list">
+      <li><span class="date">11-07</span><span class="ttl">白ニーソ 标签周投稿 1 840 张，比上周多 96 张；白いタイツ 为 612 张。</span><span class="src">Pixiv 标签页</span></li>
+      <li><span class="date">11-06</span><span class="ttl">图包合集 #127 完成校对，剔除 14 张错标为白丝的灰丝图。</span><span class="src">整理记录</span></li>
+      <li><span class="date">11-05</span><span class="ttl">Melonbooks 白丝题材新品 14 本上架，其中 5 本有电子版。</span><span class="src">通贩列表</span></li>
+      <li><span class="date">11-04</span><span class="ttl">画师 あおいね 发布 8 张组图，附分层 PSD，评论区有人指出第 3 张袜口透视偏。</span><span class="src">Pixiv 作品页</span></li>
+      <li><span class="date">11-03</span><span class="ttl">秋季 VTuber 新皮 6 套公开设定稿，白袜配色 4 套，灰度阴影比例均标注。</span><span class="src">设定稿汇总</span></li>
+      <li><span class="date">11-02</span><span class="ttl">JK 制服白袜尺码对照表更新，补入 45cm 与 55cm 两档实测数据。</span><span class="src">穿搭笔记</span></li>
+      <li><span class="date">11-01</span><span class="ttl">同人展摊位表公布，32 摊中 11 摊主打白袜角色，含 3 摊首发新刊。</span><span class="src">参展方公告</span></li>
+    </ul>
+  </section>
+
+  <section class="block" id="channels">
+    <h2>分类入口：九个检索频道</h2>
+    <p class="sub">频道按使用场景分，不按平台分；同一平台会出现在多个频道里。</p>
+    <div class="tags">
+      <a href="/#picks">#白丝插画画师</a>
+      <a href="/#guide">#过膝袜Coser出图</a>
+      <a href="/#deep">#Pixiv标签变动</a>
+      <a href="/#overview">#VTuber白袜设定</a>
+      <a href="/#latest">#图包合集校对</a>
+      <a href="/#guide">#JK制服搭配</a>
+      <a href="/#faq">#白丝布料D数</a>
+      <a href="/#comments">#同人志新品</a>
+      <a href="/#ranking">#本周条目榜单</a>
+    </div>
+  </section>
+
+  <section class="block" id="deep">
+    <h2>深度解析：白丝标签的分类为什么越分越细</h2>
+    <article class="deep">
+      <p>2026 年 10 月到 11 月，Pixiv 上跟白袜相关的可检索标签从 4 个主流写法扩展到 7 个。判断依据是名称里多出了织物类型和长度限定，而不是单纯新增译名。</p>
+      <div class="claim"><b>核心判断：</b>白丝相关检索的瓶颈已经从「有没有图」转到「长度和材质对不上」。同一张图常同时挂 2 到 3 个标签，靠单一标签翻页会漏掉约三成投稿。</div>
+      <h3>一、标签写法的三次变化</h3>
+      <p>2024 年以前，白いタイツ 与 白ニーソ 基本混用，长度差异靠画师自己在简介里写。2025 年夏季开始，部分画师在标签里补 80デニール、シアー 之类的材质词。到 2026 年 10 月 28 日，Pixiv 作品页标签区已经能看到同一作品挂 白いタイツ、白ニーソ、ハイソックス 三个词的情况。</p>
+      <table class="mini">
+        <caption style="caption-side:top;text-align:left;font-size:.8rem;color:#8c8578;padding-bottom:6px">标签写法对照（2026年11月7日检索）</caption>
+        <thead><tr><th>写法</th><th>常见长度</th><th>典型材质词</th><th>周投稿量</th></tr></thead>
+        <tbody>
+          <tr><td>白いタイツ</td><td>连裤</td><td>80デニール、不透</td><td>612</td></tr>
+          <tr><td>白ニーソ</td><td>过膝 40–55cm</td><td>リブ、シアー</td><td>1 840</td></tr>
+          <tr><td>白ハイソックス</td><td>小腿中段</td><td>棉质、罗纹口</td><td>287</td></tr>
+        </tbody>
+      </table>
+      <p>表格里的数值是 11 月 7 日单次检索结果，会随后续投稿浮动。可核对的做法是隔 24 小时再查一次，看三个标签的相对比例是否稳定。10 月 31 日到 11 月 7 日这一周，白ニーソ 占比始终在 65% 上下，说明它是当前主入口。</p>
+      <h3>二、长度词与材质词的分工</h3>
+      <p>长度词决定一张图能不能被找到，材质词决定找到之后合不合用。11 月 3 日公开的 4 套 VTuber 设定稿里，白袜部分都单独标了阴影灰度，其中 3 套在说明里写了 30デニール。这个数字对应的是透光度，不是厚度。</p>
+      <div class="quote">「30D 的白色在棚拍灯下会泛灰，想拍出乳白感要用 60D 以上再压曝光。」<cite>——某 Coser 出图笔记，11月2日发布，原文措辞</cite></div>
+      <p>这条笔记与插画侧的用法不同。插画里白袜高光靠分层叠色，不需要考虑织物透光；真人出图如果照搬插画的高光位置，小腿前侧会过曝。2026 年 10 月 30 日一组外景图里，摄影师把补光灯从正面移到 45 度侧位，白袜面细节才保留下来。</p>
+      <h3>三、可核对的判断拆成三步</h3>
+      <p>遇到「这张图算不算白丝」的分歧，可以按下面三步查，不用凭印象争。</p>
+      <ol class="steps">
+        <li><b>看长度位置</b>袜口过膝还是到小腿中段，决定了它归 ニーソ 还是 ハイソックス。11 月 6 日校对时剔除的 14 张图里，9 张是长度不够。</li>
+        <li><b>看颜色是否纯白</b>米白、灰白、带印刷图案的不算。图包 #127 里保留的 214 张，饱和度低于 8% 的只有 6 张。</li>
+        <li><b>看是否可确认出处</b>没有作者页或发布时间的转发图不收录。这一条让本周条目从 58 条压到 36 条。</li>
+      </ol>
+      <p>三步里最容易出争议的是第二步。10 月 29 日一张投稿因环境光偏暖被判定为米白，作者在评论区回应是白平衡设置问题，并补发了原始色值截图。这类回应属于作者自述，可作参考，不直接改写分类结果。</p>
+      <h3>四、分类变细之后的实际代价</h3>
+      <p>分类越细，检索成本越高。以 11 月第一周为例，只用 白ニーソ 一个词能覆盖大约 65% 的相关投稿；补上 白いタイツ 和 白ハイソックス 后覆盖率到 92%，但要多翻 3 个结果页。对只做灵感收集的人，这个代价不划算；对要整理图包的人，漏掉 8% 就意味着图包不完整。</p>
+      <p>另一个代价是误标增加。11 月 6 日校对时发现，标了白丝的图里有 6.5% 实际是浅灰或象牙色。这个比例比 9 月的 4.1% 高，原因是新画师加入了材质词但没核对色值。可核对的方法是抽查 30 张，数错标张数，再决定要不要整包重筛。</p>
+    </article>
+  </section>
+
+  <section class="block" id="guide">
+    <h2>体验指南：从检索到成包的五个步骤</h2>
+    <p class="sub">以整理一份 50 张规模的白丝角色图包为例，流程按实际操作顺序排。</p>
+    <ol class="steps">
+      <li><b>先用长度词定范围</b>确定要过膝还是连裤，再选对应标签。11 月 7 日检索 白ニーソ 得 1 840 张，缩到「站姿 + 全身」后剩 310 张。</li>
+      <li><b>并行三语检索</b>白いタイツ、white tights、白ニーソ 各翻 5 页，去重后通常能多出 15% 到 20% 的候选图。</li>
+      <li><b>按色值筛一遍</b>用取色工具看袜面 RGB，三通道差超过 12 的先标待定。图包 #127 的 228 张候选里，这一步去掉 14 张。</li>
+      <li><b>记录出处与日期</b>每张图存作者名、作品页发布时间。11 月 4 日那组 8 张图就需要分别记录，因为其中 2 张是后补的。</li>
+      <li><b>写成可复核的清单</b>清单里写清筛选标准和剔除理由，下次校对能直接对照，不用重看全部图片。</li>
+    </ol>
+    <div class="compare">
+      <div>
+        <h3>适合收进图包</h3>
+        <ul>
+          <li>袜口长度明确，过膝或连裤可辨</li>
+          <li>色值接近纯白，三通道差小于 12</li>
+          <li>有作者页与发布时间</li>
+          <li>构图完整，不裁掉袜口</li>
+        </ul>
+      </div>
+      <div>
+        <h3>建议单独标注</h3>
+        <ul>
+          <li>浅灰或象牙色误标白丝</li>
+          <li>只到小腿中段的短袜</li>
+          <li>转发无出处，作者不可查</li>
+          <li>带大面积印刷图案</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ranking">
+    <h2>本周条目榜单：按可核对信息量排</h2>
+    <p class="sub">排名依据是条目里含日期、作者、数量的密度，与浏览量无关。</p>
+    <ul class="list">
+      <li><span class="date">01</span><span class="ttl">Pixiv 白ニーソ 周投稿 1 840 张，附 7 日趋势对比</span><span class="src">数据完整度 高</span></li>
+      <li><span class="date">02</span><span class="ttl">图包合集 #127 校对记录，含剔除理由与色值阈值</span><span class="src">数据完整度 高</span></li>
+      <li><span class="date">03</span><span class="ttl">あおいね 8 张组图与分层 PSD 发布</span><span class="src">数据完整度 中</span></li>
+      <li><span class="date">04</span><span class="ttl">Coser 出图笔记：30D 与 60D 白袜实拍对比</span><span class="src">数据完整度 中</span></li>
+      <li><span class="date">05</span><span class="ttl">JK 制服白袜尺码表补入 45cm、55cm 两档</span><span class="src">数据完整度 中</span></li>
+    </ul>
+  </section>
+
+  <section class="block" id="info">
+    <h2>相关资讯：三条只在此处出现的记录</h2>
+    <ul class="list">
+      <li><span class="date">10-31</span><span class="ttl">某图站调整标签合并规则，白いタイツ 与 白タイツ 被归入同一检索结果，此前分别计数。</span><span class="src">平台公告</span></li>
+      <li><span class="date">10-29</span><span class="ttl">一张白袜投稿因环境光偏暖被质疑色值，作者补发原始色值截图，评论区就白平衡归属争论 40 余条。</span><span class="src">作品评论区</span></li>
+      <li><span class="date">10-27</span><span class="ttl">同人社团「しろい足」宣布 12 月合同志延期两周，理由是印刷厂白墨套色需要重打样。</span><span class="src">社团公告</span></li>
+    </ul>
+  </section>
+
+  <section class="block" id="timeline">
+    <h2>时间线：白丝标签近半个月的变动</h2>
+    <ul class="timeline">
+      <li><span class="when">10月26日</span><b>材质词开始成组出现</b>部分画师在标签里加 デニール 数值，检索笔记开始按厚度分类。</li>
+      <li><span class="when">10月29日</span><b>色值争议</b>一张投稿的米白与纯白判定引发讨论，作者补发色值截图。</li>
+      <li><span class="when">11月3日</span><b>VTuber 设定稿公开</b>4 套白袜配色，均标注灰度阴影比例。</li>
+      <li><span class="when">11月6日</span><b>图包 #127 校对完成</b>剔除 14 张错标图，保留 214 张。</li>
+      <li><span class="when">11月7日</span><b>周投稿量更新</b>白ニーソ 1 840 张，白いタイツ 612 张。</li>
+    </ul>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>常见问题：白丝检索与整理</h2>
+    <details class="faq">
+      <summary>白丝在插画和真人出图里的标准一样吗？</summary>
+      <div class="ans">不一样。插画看分层高光和色值，真人看织物透光度。30D 白袜在棚拍灯下偏灰，插画里则靠叠加乳白色层来表现。11 月 2 日的出图笔记给出 60D 以上的实拍建议，与插画侧的用色逻辑是两套方法。</div>
+    </details>
+    <details class="faq">
+      <summary>Pixiv 上搜白丝应该用哪个日文词？</summary>
+      <div class="ans">白ニーソ 覆盖过膝款，11 月 7 日检索得 1 840 张；白いタイツ 偏连裤，612 张。三个常见写法一起搜覆盖率约 92%，单用一个会漏掉约三成相关投稿。</div>
+    </details>
+    <details class="faq">
+      <summary>白丝和灰丝怎么区分？</summary>
+      <div class="ans">看袜面 RGB 三通道差。图包 #127 采用阈值 12，超过的标为待定或剔除。11 月 6 日的校对里，228 张候选中有 14 张因色值差与长度不符被去掉。</div>
+    </details>
+    <details class="faq">
+      <summary>JK 制服常见的白袜长度有哪几档？</summary>
+      <div class="ans">40cm、45cm、50cm、55cm 四档。11 月 2 日的尺码表补入了 45cm 与 55cm 实测数据，坐姿下 50cm 更贴合，站姿 40cm 与裙摆比例更顺。</div>
+    </details>
+    <details class="faq">
+      <summary>没有作者出处的白丝图能放进图包吗？</summary>
+      <div class="ans">不建议。校对规则要求每张图有作者页和发布时间，这条规则把本周条目从 58 条压到 36 条。转发图无法核对原始发布，后续追溯成本高。</div>
+    </details>
+    <details class="faq">
+      <summary>同人志里的白丝收录和插画图包标准一样吗？</summary>
+      <div class="ans">同人志按刊号和摊位数登记，11 月 5 日上架的 14 本里 5 本有电子版。图包按单张图筛。两者共用的只有色值和长度两条硬标准。</div>
+    </details>
+  </section>
+
+  <section class="block" id="comments">
+    <h2>用户评论：关于具体条目的反馈</h2>
+    <div class="comments">
+      <div class="comment">
+        <div class="who"><span class="avatar">林</span><b>林间拾图</b> · 11月7日</div>
+        <p class="body-t">白ニーソ 这周 1 840 张，翻下来真正符合过膝的不到七成，剩下好多是短袜硬标。整理的时候最好把长度词再过一遍。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">K</span><b>Kumo_07</b> · 11月6日</div>
+        <p class="body-t">图包 #127 的校对记录挺有用，色值阈值 12 这个数直接拿去用了。不过剔除的那 14 张里有两张我觉得还能留，长度其实够。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">阿</span><b>阿澄</b> · 11月5日</div>
+        <p class="body-t">あおいね 那组第 3 张袜口透视确实有点偏，评论里有人指出来之后作者回了个「下次改」。分层 PSD 倒是良心。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">灰</span><b>灰白灰白</b> · 11月4日</div>
+        <p class="body-t">说实话现在标签分这么细，找图反而累了。以前一个词翻到底，现在得开三个页面并排看。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">猫</span><b>猫口三味</b> · 11月3日</div>
+        <p class="body-t">VTuber 新皮那 4 套白袜设定稿，灰度阴影比例标得很细，做参考图很方便。就是其中一套的袜口蕾丝线稿不太清楚。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">三</span><b>三上先辈</b> · 11月2日</div>
+        <p class="body-t">10 月 29 日那张色值争议的图，作者补的截图我看过，白平衡确实偏暖。评论区吵 40 多条没必要，测一下三通道就完了。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="related">
+    <h2>相关推荐：可继续检索的词条</h2>
+    <div class="tags">
+      <a href="/#deep">#白いタイツ标签历史</a>
+      <a href="/#guide">#白袜D数对照表</a>
+      <a href="/#overview">#过膝袜角色立绘</a>
+      <a href="/#picks">#あおいね分层PSD</a>
+      <a href="/#latest">#图包校对阈值</a>
+      <a href="/#faq">#白丝色值三通道</a>
+      <a href="/#ranking">#本周条目榜单</a>
+      <a href="/#info">#同人志延期公告</a>
+    </div>
+  </section>
+
+</main>
+
+<aside aria-label="侧栏">
+  <div class="panel">
+    <h2>栏目导航</h2>
+    <nav class="side-nav" id="sideNav" aria-label="页内栏目">
+      <a href="#overview">领域概览</a>
+      <a href="#picks">精选内容推荐</a>
+      <a href="#latest">最新更新</a>
+      <a href="#channels">分类入口</a>
+      <a href="#deep">深度解析</a>
+      <a href="#guide">体验指南</a>
+      <a href="#ranking">本周榜单</a>
+      <a href="#info">相关资讯</a>
+      <a href="#timeline">时间线</a>
+      <a href="#faq">常见问题</a>
+      <a href="#comments">用户评论</a>
+      <a href="#related">相关推荐</a>
+    </nav>
+  </div>
+  <div class="panel">
+    <h2>本周数字</h2>
+    <ul style="list-style:none;font-size:.88rem;color:#4a5473;line-height:2">
+      <li>白ニーソ 投稿：1 840 张</li>
+      <li>白いタイツ 投稿：612 张</li>
+      <li>图包校对：214 张保留</li>
+      <li>剔除错标：14 张</li>
+      <li>同人志新品：14 本</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>校对说明</h2>
+    <p style="font-size:.84rem;color:#8c8578;line-height:1.8">条目日期范围为 10 月 27 日至 11 月 7 日。数量取自单次检索，会随投稿浮动，隔日复核以相对比例为准。</p>
+  </div>
+</aside>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <div class="fbrand">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#f7f2ea"/>
+          <circle cx="24" cy="26" r="6" fill="#222a44"/>
+          <circle cx="42" cy="26" r="6" fill="#222a44"/>
+          <path d="M18 46c4-9 10-13 14-13s10 4 14 13" stroke="#c2557a" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="txt">白丝二次元</span>
+      </div>
+      <p>把标签写法、织物参数和出图流程放在同一条记录里，方便核对与复用。</p>
+    </div>
+    <div>
+      <h3>频道入口</h3>
+      <ul>
+        <li><a href="/#picks">插画画师</a></li>
+        <li><a href="/#guide">Coser 出图</a></li>
+        <li><a href="/#overview">角色设定</a></li>
+        <li><a href="/#latest">图包整理</a></li>
+        <li><a href="/#ranking">条目榜单</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>资料与说明</h3>
+      <ul>
+        <li><a href="/#faq">常见问题</a></li>
+        <li><a href="/#info">相关资讯</a></li>
+        <li><a href="/#timeline">时间线</a></li>
+        <li><a href="/#comments">用户评论</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">
+    <span>示例数据说明：页面中的平台、作者、数量与日期为按领域特征生成的示例条目，仅用于展示编排方式。</span>
+    <span>内容更新：11月7日 · 对应最新更新板块与周投稿数字两项可核对记录。</span>
+    <span>© 2026 白丝二次元</span>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn');
+  var nav=document.getElementById('mainnav');
+  if(menuBtn&&nav){
+    menuBtn.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&window.innerWidth<=960){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  var toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>420){toTop.classList.add('show');}
+    else{toTop.classList.remove('show');}
+  },{passive:true});
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  var sideLinks=Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var sections=sideLinks.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  if('IntersectionObserver' in window && sections.length){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          sideLinks.forEach(function(a){a.classList.remove('active');});
+          var id='#'+en.target.id;
+          sideLinks.forEach(function(a){
+            if(a.getAttribute('href')===id){a.classList.add('active');}
+          });
+        }
+      });
+    },{rootMargin:'-40% 0px -50% 0px',threshold:0});
+    sections.forEach(function(s){io.observe(s);});
+  }
+
+  var input=document.getElementById('siteSearch');
+  var btn=document.getElementById('searchBtn');
+  var msg=document.getElementById('search-msg');
+  function doSearch(){
+    var q=(input.value||'').trim();
+    if(!q){msg.textContent='请输入条目、标签或问题关键词。';return;}
+    var lower=q.toLowerCase();
+    var blocks=Array.prototype.slice.call(document.querySelectorAll('main .block'));
+    var firstHit=null;
+    var hitCount=0;
+    blocks.forEach(function(b){
+      var text=b.textContent.toLowerCase();
+      if(text.indexOf(lower)>-1){
+        hitCount++;
+        b.style.outline='2px solid #c2557a';
+        b.style.outlineOffset='6px';
+        if(!firstHit){firstHit=b;}
+        setTimeout(function(){b.style.outline='';},2600);
+      }
+    });
+    if(hitCount===0){
+      msg.textContent='没有找到包含「'+q+'」的条目，试试 白ニーソ、色值、图包 或 Coser。';
+    }else{
+      msg.textContent='找到 '+hitCount+' 个相关栏目，已高亮显示。';
+      if(firstHit){firstHit.scrollIntoView({behavior:'smooth',block:'start'});}
+    }
+  }
+  if(btn){btn.addEventListener('click',doSearch);}
+  if(input){input.addEventListener('keydown',function(e){if(e.key==='Enter'){doSearch();}});}
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&nav&&nav.classList.contains('open')){
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.focus();
+    }
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"白丝二次元",
+  "description":"围绕白丝角色穿搭、插画图站与同人创作的内容索引，整理标签写法、织物参数与出图流程。",
+  "inLanguage":"zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"白丝在插画和真人出图里的标准一样吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"不一样。插画看分层高光和色值，真人看织物透光度。30D 白袜在棚拍灯下偏灰，插画里则靠叠加乳白色层来表现。"}
+    },
+    {
+      "@type":"Question",
+      "name":"Pixiv 上搜白丝应该用哪个日文词？",
+      "acceptedAnswer":{"@type":"Answer","text":"白ニーソ 覆盖过膝款，11 月 7 日检索得 1 840 张；白いタイツ 偏连裤，612 张。三个常见写法一起搜覆盖率约 92%。"}
+    },
+    {
+      "@type":"Question",
+      "name":"白丝和灰丝怎么区分？",
+      "acceptedAnswer":{"@type":"Answer","text":"看袜面 RGB 三通道差。图包 #127 采用阈值 12，超过的标为待定或剔除。"}
+    },
+    {
+      "@type":"Question",
+      "name":"JK 制服常见的白袜长度有哪几档？",
+      "acceptedAnswer":{"@type":"Answer","text":"40cm、45cm、50cm、55cm 四档。坐姿下 50cm 更贴合，站姿 40cm 与裙摆比例更顺。"}
+    },
+    {
+      "@type":"Question",
+      "name":"没有作者出处的白丝图能放进图包吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"不建议。校对规则要求每张图有作者页和发布时间，转发图无法核对原始发布，后续追溯成本高。"}
+    }
+  ]
+}
+</script>
+</body>
+                                                                         </html>
